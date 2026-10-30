@@ -57,9 +57,9 @@ from airflow.sdk.execution_time.supervisor import ActivitySubprocess, NeverRaise
 if TYPE_CHECKING:
     import pathlib
     from collections.abc import Callable, Sequence
+    from typing import Self
 
     from structlog.typing import FilteringBoundLogger
-    from typing_extensions import Self
 
     from airflow.dag_processing.bundles.base import BaseDagBundle  # noqa: SDK002
     from airflow.sdk.api.client import Client
@@ -197,6 +197,7 @@ def _build_runtime_env() -> dict[str, str]:
         "AIRFLOW__API__BASE_URL": conf.get("api", "base_url", fallback="/"),
         "AIRFLOW__OPERATORS__DEFAULT_DEFERRABLE": str(conf.getboolean("operators", "default_deferrable")),
         "AIRFLOW__TRIGGERER__QUEUES_ENABLED": str(conf.getboolean("triggerer", "queues_enabled")),
+        "AIRFLOW__STATE_STORE__DEFAULT_RETENTION_DAYS": conf.get("state_store", "default_retention_days"),
     }
 
 
