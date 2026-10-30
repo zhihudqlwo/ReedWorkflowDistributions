@@ -1,0 +1,234 @@
+# ReedWorkflowDistributions
+
+The published workflow-package source mirror retains its original implementation and README maintenance ledger.
+
+### 📝 Complete TODO List
+
+- [ ] **airflow-core/src/airflow/api_fastapi/core_api/services/public/dag_run.py:214** - # TODO AIP-103: https://github.com/apache/airflow/issues/66755
+- [ ] **airflow-core/src/airflow/api_fastapi/execution_api/routes/asset_state_store.py:74** - # TODO(AIP-103): enforce that the requesting task is registered with the asset
+- [ ] **airflow-core/src/airflow/api_fastapi/execution_api/routes/task_instances.py:324** - # TODO: Add variables and connections that are needed (and has perms) for the task
+- [ ] **airflow-core/src/airflow/api_fastapi/execution_api/routes/task_instances.py:778** - # TODO: HANDLE execution timeout later as it requires a call to the DB
+- [ ] **airflow-core/src/airflow/api_fastapi/execution_api/routes/xcoms.py:408** - # TODO: once we have JWT tokens, then remove dag_id/run_id/task_id from the URL and just use the info in
+- [ ] **airflow-core/src/airflow/api_fastapi/execution_api/routes/xcoms.py:490** - # TODO: Can/should we check if a client _hasn't_ provided this for an upstream of a mapped task? That
+- [ ] **airflow-core/src/airflow/cli/commands/task_command.py:221** - # TODO: Remove this once DagVersion.get_latest_version is guaranteed to return a DagVersion/raise
+- [ ] **airflow-core/src/airflow/cli/commands/task_command.py:286** - # TODO, Do we want to print or log this
+- [ ] **airflow-core/src/airflow/cli/commands/task_command.py:447** - # TODO: move bulk of this logic into the SDK: http://github.com/apache/airflow/issues/54658
+- [ ] **airflow-core/src/airflow/cli/commands/task_command.py:509** - # todo clear command only accepts a single dag_id. no reason for get_dags with 's' except regex?
+- [ ] **airflow-core/src/airflow/dag_processing/collection.py:446** - # todo: make listener accept bundle_name and relative_filename
+- [ ] **airflow-core/src/airflow/dag_processing/dagbag.py:193** - # todo AIP-66: rename this to path
+- [ ] **airflow-core/src/airflow/dag_processing/manager.py:401** - # TODO: Temporary until AIP-92 removes DB access from DagProcessorManager.
+- [ ] **airflow-core/src/airflow/dag_processing/manager.py:908** - # TODO: AIP-66 handle errors in the case of incomplete cloning? And test this.
+- [ ] **airflow-core/src/airflow/dag_processing/processor.py:227** - # TODO: Set known_pool names on DagBag!
+- [ ] **airflow-core/src/airflow/executors/base_executor.py:332** - # TODO(airflow 4.0): flatten to dict[WorkloadKey, ExecutorWorkload] once the deprecated
+- [ ] **airflow-core/src/airflow/executors/base_executor.py:623** - # TODO: This should not be using `TaskInstanceState` here, this is just "did the process complete, or did
+- [ ] **airflow-core/src/airflow/executors/base_executor.py:894** - # TODO: Create a protocol for this.
+- [ ] **airflow-core/src/airflow/jobs/scheduler_job_runner.py:783** - # TODO[HA]: This was wrong before anyway, as it only looked at a sub-set of dags, not everything.
+- [ ] **airflow-core/src/airflow/jobs/scheduler_job_runner.py:1352** - # TODO: Add dagrun_id as a proper ORM foreign key on the callback table instead of storing in data dict.
+- [ ] **airflow-core/src/airflow/jobs/scheduler_job_runner.py:2601** - # todo: AIP-78 simplify this function to an update statement
+- [ ] **airflow-core/src/airflow/jobs/scheduler_job_runner.py:2772** - # todo: if you get a database error here, continuing does not work because
+- [ ] **airflow-core/src/airflow/jobs/scheduler_job_runner.py:2777** - # TODO[HA]: Should we do a session.flush() so we don't have to keep lots of state/object in
+- [ ] **airflow-core/src/airflow/jobs/scheduler_job_runner.py:3066** - # todo: delete all "candidate dag runs" from list for this dag right now
+- [ ] **airflow-core/src/airflow/jobs/scheduler_job_runner.py:3080** - # todo: delete all candidate dag runs for this dag from list right now
+- [ ] **airflow-core/src/airflow/jobs/scheduler_job_runner.py:3220** - # TODO[HA]: Rename update_state -> schedule_dag_run, ?? something else?
+- [ ] **airflow-core/src/airflow/jobs/triggerer_job_runner.py:243** - # TODO: signal instead.
+- [ ] **airflow-core/src/airflow/jobs/triggerer_job_runner.py:1074** - # TODO: Is a separate dict worth it, or should we make `self.running_triggers` a dict?
+- [ ] **airflow-core/src/airflow/jobs/triggerer_job_runner.py:1098** - # TODO: convert the dict back to a pretty stack trace
+- [ ] **airflow-core/src/airflow/jobs/triggerer_job_runner.py:1238** - # TODO: connect this to the parent process
+- [ ] **airflow-core/src/airflow/jobs/triggerer_job_runner.py:1537** - # TODO: better formatting of the exception?
+- [ ] **airflow-core/src/airflow/migrations/versions/0017_2_9_2_fix_inconsistency_between_ORM_and_migration_files.py:91** - # TODO: Rewrite these queries to use alembic when lowest MYSQL version supports IF EXISTS
+- [ ] **airflow-core/src/airflow/migrations/versions/0093_3_2_0_restructure_callback_table.py:52** - # TODO: migrate existing rows for pending DagProcessor callbacks
+- [ ] **airflow-core/src/airflow/migrations/versions/0101_3_2_0_ui_improvements_for_deadlines.py:173** - # TODO: We may finally have come up with a better naming convention. For ease of migration,
+- [ ] **airflow-core/src/airflow/migrations/versions/0101_3_2_0_ui_improvements_for_deadlines.py:373** - # TODO: Is this overkill?  Maybe... Consider adding a config option to
+- [ ] **airflow-core/src/airflow/models/connection.py:501** - # TODO: This is not the best way of having compat, but it's "better than erroring" for now. This still
+- [ ] **airflow-core/src/airflow/models/dag.py:393** - # todo: should not be nullable if we have a default
+- [ ] **airflow-core/src/airflow/models/dagrun.py:858** - # todo: AIP-78 use row_number to avoid starvation; limit the number of returned runs per-dag
+- [ ] **airflow-core/src/airflow/models/dagrun.py:2152** - # TODO[HA]: We probably need to savepoint this so we can keep the transaction alive.
+- [ ] **airflow-core/src/airflow/models/deadline.py:239** - # TODO: Use the TaskAPI from within Triggerer to fetch full context instead of sending this context
+- [ ] **airflow-core/src/airflow/models/expandinput.py:129** - # TODO: This initiates one database call for each XComArg. Would it be
+- [ ] **airflow-core/src/airflow/models/taskinstance.py:1995** - # TODO: We have some code duplication here and in the _create_ti_state_update_query_and_update_state
+- [ ] **airflow-core/src/airflow/models/taskinstance.py:2690** - # TODO: Compare it with self._set_duration method
+- [ ] **airflow-core/src/airflow/models/variable.py:185** - # TODO: This is not the best way of having compat, but it's "better than erroring" for now. This still
+- [ ] **airflow-core/src/airflow/models/variable.py:252** - # TODO: This is not the best way of having compat, but it's "better than erroring" for now. This still
+- [ ] **airflow-core/src/airflow/models/variable.py:339** - # TODO: This is not the best way of having compat, but it's "better than erroring" for now. This still
+- [ ] **airflow-core/src/airflow/models/variable.py:405** - # TODO: This is not the best way of having compat, but it's "better than erroring" for now. This still
+- [ ] **airflow-core/src/airflow/serialization/definitions/baseoperator.py:148** - # TODO: Remove the following, they aren't used anymore
+- [ ] **airflow-core/src/airflow/serialization/definitions/baseoperator.py:407** - # TODO (GH-52141): Copied from sdk. Find a better place for this to live in.
+- [ ] **airflow-core/src/airflow/serialization/definitions/baseoperator.py:420** - # TODO (GH-52141): Copied from sdk. Find a better place for this to live in.
+- [ ] **airflow-core/src/airflow/serialization/definitions/baseoperator.py:429** - # TODO (GH-52141): Copied from sdk. Find a better place for this to live in.
+- [ ] **airflow-core/src/airflow/serialization/definitions/baseoperator.py:438** - # TODO (GH-52141): Copied from sdk. Find a better place for this to live in.
+- [ ] **airflow-core/src/airflow/serialization/definitions/dag.py:92** - # TODO (GH-52141): Share definition with SDK?
+- [ ] **airflow-core/src/airflow/serialization/definitions/dag.py:668** - # todo: AIP-78 add verification that if run type is backfill then we have a backfill id
+- [ ] **airflow-core/src/airflow/serialization/definitions/dag.py:774** - # TODO : Pretty sure we can drop these last two; verify after testing is complete
+- [ ] **airflow-core/src/airflow/serialization/definitions/mappedoperator.py:163** - # TODO (GH-52141): Review if any of the properties below are used in the
+- [ ] **airflow-core/src/airflow/serialization/definitions/mappedoperator.py:374** - # TODO: Need to verify if the following two are needed on the server side.
+- [ ] **airflow-core/src/airflow/serialization/definitions/mappedoperator.py:431** - # TODO (GH-52141): Copied from sdk. Find a better place for this to live in.
+- [ ] **airflow-core/src/airflow/serialization/definitions/mappedoperator.py:436** - # TODO (GH-52141): Copied from sdk. Find a better place for this to live in.
+- [ ] **airflow-core/src/airflow/serialization/definitions/mappedoperator.py:449** - # TODO (GH-52141): Copied from sdk. Find a better place for this to live in.
+- [ ] **airflow-core/src/airflow/serialization/definitions/mappedoperator.py:458** - # TODO (GH-52141): Copied from sdk. Find a better place for this to live in.
+- [ ] **airflow-core/src/airflow/serialization/definitions/mappedoperator.py:467** - # TODO (GH-52141): Copied from sdk. Find a better place for this to live in.
+- [ ] **airflow-core/src/airflow/serialization/definitions/mappedoperator.py:493** - # TODO (GH-52141): Implement this.
+- [ ] **airflow-core/src/airflow/serialization/definitions/mappedoperator.py:501** - # TODO (GH-52141): Move the implementation in SDK MappedOperator here.
+- [ ] **airflow-core/src/airflow/serialization/definitions/mappedoperator.py:512** - # TODO (GH-52141): Rewrite tests so we can drop SDK references at some point.
+- [ ] **airflow-core/src/airflow/serialization/definitions/mappedoperator.py:523** - # TODO (GH-52141): Rewrite tests so we can drop SDK references at some point.
+- [ ] **airflow-core/src/airflow/serialization/definitions/mappedoperator.py:530** - # TODO (GH-52141): 'task' here should be scheduler-bound and returns scheduler expand input.
+- [ ] **airflow-core/src/airflow/serialization/definitions/mappedoperator.py:574** - # TODO (GH-52141): 'group' here should be scheduler-bound and returns scheduler expand input.
+- [ ] **airflow-core/src/airflow/serialization/definitions/taskgroup.py:54** - # TODO: Are these actually useful?
+- [ ] **airflow-core/src/airflow/serialization/definitions/taskgroup.py:105** - # TODO (GH-52141): This shouldn't need to be writable after serialization,
+- [ ] **airflow-core/src/airflow/serialization/serialized_objects.py:19** - # TODO: update test_recursive_serialize_calls_must_forward_kwargs and re-enable RET505
+- [ ] **airflow-core/src/airflow/serialization/serialized_objects.py:56** - # TODO: Copy this into the scheduler?
+- [ ] **airflow-core/src/airflow/serialization/serialized_objects.py:463** - # TODO (GH-52141): When can we remove scheduler constructs here?
+- [ ] **airflow-core/src/airflow/serialization/serialized_objects.py:1254** - # TODO: refactor deserialization of BaseOperator and MappedOperator (split it out), then check
+- [ ] **airflow-core/src/airflow/serialization/serialized_objects.py:1799** - # TODO: Move this logic to a better place -- ideally before serializing contents of default_args.
+- [ ] **airflow-core/src/airflow/ti_deps/dependencies_deps.py:50** - # TODO(aoen): SCHEDULER_QUEUED_DEPS is not coupled to actual scheduling/execution
+- [ ] **airflow-core/src/airflow/timetables/base.py:204** - # TODO (GH-52141): Find a way to keep this and one in Core in sync.
+- [ ] **airflow-core/src/airflow/timetables/base.py:220** - # TODO (GH-52141): Find a way to keep this and one in Core in sync.
+- [ ] **airflow-core/src/airflow/timetables/simple.py:97** - # TODO (GH-52141): Find a way to keep this and one in Core in sync.
+- [ ] **airflow-core/src/airflow/timetables/simple.py:154** - # TODO (GH-52141): Find a way to keep this and one in Core in sync.
+- [ ] **airflow-core/src/airflow/triggers/callback.py:65** - # TODO: get full context and run template rendering. Right now, a simple context is included in `callback_kwargs`
+- [ ] **airflow-core/src/airflow/typing_compat.py:32** - # TODO: Remove once Python 3.10 support is dropped (EOL 2026)
+- [ ] **airflow-core/src/airflow/utils/cli.py:249** - # TODO: AIP-66 - investigate more, can we use serdag?
+- [ ] **airflow-core/src/airflow/utils/cli.py:326** - # TODO: Support running a Lang-SDK Dag directly from the CLI.
+- [ ] **airflow-core/src/airflow/utils/db.py:93** - # TODO: Import this from sqlalchemy.orm instead when switching to SQLA 2.
+- [ ] **airflow-ctl/src/airflowctl/ctl/console_formatting.py:36** - # TODO (bugraoz93): Use Vendor Approach and unify with airflow.platform for core-ctl
+- [ ] **airflow-ctl/src/airflowctl/ctl/utils/yaml.py:17** - # TODO (bugraoz93): Use Vendor Approach and unify with airflow.utils.yaml for core-ctl
+- [ ] **providers/amazon/src/airflow/providers/amazon/aws/executors/aws_lambda/lambda_executor.py:108** - # TODO: Remove this fallback once the min Airflow version for providers is >= 3.1
+- [ ] **providers/amazon/src/airflow/providers/amazon/aws/executors/batch/batch_executor.py:127** - # TODO: Remove this fallback once the min Airflow version for providers is >= 3.1
+- [ ] **providers/amazon/src/airflow/providers/amazon/aws/executors/ecs/ecs_executor.py:137** - # TODO: Remove this fallback once the min Airflow version for providers is >= 3.1
+- [ ] **providers/amazon/src/airflow/providers/amazon/aws/operators/glue_crawler.py:243** - # TODO: Remove GlueCrawlerOperator in Amazon provider 11.0.0 or later.
+- [ ] **providers/amazon/src/airflow/providers/amazon/aws/triggers/emr.py:677** - # TODO: Remove this handler once the minimum supported Airflow version is 3.3+.
+- [ ] **providers/amazon/src/airflow/providers/amazon/aws/utils/connection_wrapper.py:230** - # ToDo: Remove this check entirely as soon as drop support credentials from s3_config_file
+- [ ] **providers/apache/spark/src/airflow/providers/apache/spark/hooks/spark_submit.py:773** - # todo: remove try/exception when min airflow version is 3.0
+- [ ] **providers/celery/src/airflow/providers/celery/executors/celery_executor.py:123** - # TODO: Remove this flag once providers depend on Airflow 3.2.
+- [ ] **providers/celery/src/airflow/providers/celery/executors/celery_executor_utils.py:281** - # This is the "wrong" ti type, but it duck types the same. TODO: Create a protocol for this.
+- [ ] **providers/celery/src/airflow/providers/celery/executors/celery_kubernetes_executor.py:60** - # TODO: Remove this flag once providers depend on Airflow 3.0
+- [ ] **providers/celery/src/airflow/providers/celery/executors/celery_kubernetes_executor.py:188** - # TODO: Remove this once providers depend on Airflow 3.0
+- [ ] **providers/cncf/kubernetes/src/airflow/providers/cncf/kubernetes/exceptions.py:21** - # Todo: we cannot have a backcompat import for AirflowException yet
+- [ ] **providers/cncf/kubernetes/src/airflow/providers/cncf/kubernetes/executors/kubernetes_executor.py:400** - # TODO: Remove this once the minimum supported Airflow version is 3.1+ and defer to BaseExecutor.queue_workload.
+- [ ] **providers/cncf/kubernetes/src/airflow/providers/cncf/kubernetes/executors/kubernetes_executor.py:418** - # TODO: AIP-72 handle populating tokens once https://github.com/apache/airflow/issues/45107 is handled.
+- [ ] **providers/cncf/kubernetes/src/airflow/providers/cncf/kubernetes/executors/kubernetes_executor_types.py:76** - # TODO: Remove after Airflow 2 support is removed
+- [ ] **providers/cncf/kubernetes/src/airflow/providers/cncf/kubernetes/executors/local_kubernetes_executor.py:57** - # TODO: Remove this attribute once providers rely on Airflow >=3.0.0
+- [ ] **providers/cncf/kubernetes/src/airflow/providers/cncf/kubernetes/operators/pod.py:519** - # TODO: remove it from here and from the operator's parameters list when the next major version bumped
+- [ ] **providers/cncf/kubernetes/src/airflow/providers/cncf/kubernetes/operators/pod.py:526** - # TODO: remove it when removing convert_config_file_to_dict
+- [ ] **providers/cncf/kubernetes/src/airflow/providers/cncf/kubernetes/operators/pod.py:632** - # TODO: Remove this when the minimum version of Airflow is bumped to 3.0
+- [ ] **providers/cncf/kubernetes/src/airflow/providers/cncf/kubernetes/operators/spark_kubernetes.py:212** - # TODO: Remove this when the minimum version of Airflow is bumped to 3.0
+- [ ] **providers/cncf/kubernetes/src/airflow/providers/cncf/kubernetes/triggers/pod.py:539** - # TODO: Remove this Airflow < 3.3 cleanup branch (early return, ``safe_to_cancel``, and
+- [ ] **providers/common/ai/src/airflow/providers/common/ai/toolsets/datafusion.py:240** - # TODO: refactor engine.get_schema() to return JSON and update this accordingly
+- [ ] **providers/common/compat/src/airflow/providers/common/compat/module_loading/__init__.py:35** - # TODO: Remove it when Airflow 3.2.0 is the minimum version
+- [ ] **providers/common/io/src/airflow/providers/common/io/xcom/backend.py:133** - # TODO: Remove this branch once we drop support for Airflow 2
+- [ ] **providers/common/sql/src/airflow/providers/common/sql/config.py:42** - # TODO: Add delta format support
+- [ ] **providers/common/sql/src/airflow/providers/common/sql/datafusion/engine.py:41** - # TODO: session context has additional parameters via SessionConfig see what's possible we can use Possible via DataFusionHook ?
+- [ ] **providers/common/sql/src/airflow/providers/common/sql/datafusion/format_handlers.py:122** - # TODO: Test for other catalog types
+- [ ] **providers/common/sql/src/airflow/providers/common/sql/datafusion/object_storage_provider.py:160** - # TODO: Add support for HTTP: https://datafusion.apache.org/python/autoapi/datafusion/object_store/index.html
+- [ ] **providers/common/sql/src/airflow/providers/common/sql/hooks/sql.py:109** - # TODO: this check can be removed once common sql provider depends on Airflow 3.0 or higher,
+- [ ] **providers/common/sql/src/airflow/providers/common/sql/hooks/sql.py:114** - # TODO: this can be removed once common sql provider depends on Airflow 3.0 or higher
+- [ ] **providers/common/sql/src/airflow/providers/common/sql/operators/analytics.py:91** - # TODO make it parallel as there is no dependency between queries
+- [ ] **providers/common/sql/src/airflow/providers/common/sql/operators/sql.py:205** - # TODO: can be removed once Airflow min version for this provider is 3.0.0 or higher
+- [ ] **providers/databricks/src/airflow/providers/databricks/operators/databricks.py:1897** - # TODO: Once we expand the plugin functionality in Airflow 3.1, this can be re-evaluated on how to handle the repair link.
+- [ ] **providers/databricks/src/airflow/providers/databricks/plugins/databricks_workflow.py:70** - # TODO: Need to re-think on how to support the currently unavailable repair functionality in Airflow 3. Probably a
+- [ ] **providers/dbt/cloud/src/airflow/providers/dbt/cloud/utils/openlineage.py:40** - # todo: remove when min airflow version >= 3.0
+- [ ] **providers/dbt/cloud/src/airflow/providers/dbt/cloud/utils/openlineage.py:54** - # todo: remove when min airflow version >= 3.0
+- [ ] **providers/edge3/src/airflow/providers/edge3/cli/api_client.py:60** - # TODO: Consider these env variables jointly in task sdk together with task_sdk/src/airflow/sdk/api/client.py
+- [ ] **providers/edge3/src/airflow/providers/edge3/cli/worker.py:452** - # This is the "wrong" ti type, but it duck types the same. TODO: Create a protocol for this.
+- [ ] **providers/edge3/src/airflow/providers/edge3/executors/edge_executor.py:65** - # TODO: Airflow 2 type hints; remove when Airflow 2 support is removed
+- [ ] **providers/edge3/src/airflow/providers/edge3/plugins/edge_executor_plugin.py:70** - # TODO(jscheffl): Remove this check when the discussion in
+- [ ] **providers/elasticsearch/src/airflow/providers/elasticsearch/log/es_json_formatter.py:37** - # TODO: Remove this fallback when the minimum Airflow version is 3.3.0
+- [ ] **providers/elasticsearch/src/airflow/providers/elasticsearch/log/es_task_handler.py:465** - # TODO: Can we skip group logs by host ?
+- [ ] **providers/elasticsearch/src/airflow/providers/elasticsearch/log/es_task_handler.py:607** - # TODO: This API should be simplified since Airflow 3 no longer requires this API for writing log to ES
+- [ ] **providers/fab/src/airflow/providers/fab/auth_manager/security_manager/override.py:1213** - # TODO: An action can't be removed from a role.
+- [ ] **providers/google/src/airflow/providers/google/cloud/hooks/bigquery.py:2451** - # TODO: Convert get_records into an async method
+- [ ] **providers/google/src/airflow/providers/google/cloud/hooks/cloud_storage_transfer_service.py:264** - # TODO: remove one day
+- [ ] **providers/google/src/airflow/providers/google/cloud/hooks/cloud_storage_transfer_service.py:425** - # TODO: remove one day
+- [ ] **providers/google/src/airflow/providers/google/cloud/hooks/cloud_storage_transfer_service.py:629** - # TODO: remove one day
+- [ ] **providers/google/src/airflow/providers/google/cloud/hooks/compute_ssh.py:42** - # TODO:(potiuk) We should add test harness detecting such cases shortly
+- [ ] **providers/google/src/airflow/providers/google/cloud/hooks/gcs.py:360** - # TODO: future improvement check file size before downloading,
+- [ ] **providers/google/src/airflow/providers/google/cloud/hooks/gcs.py:1512** - # TODO: Add batch. I tried to do it, but the Google library is not stable at the moment.
+- [ ] **providers/google/src/airflow/providers/google/cloud/hooks/pubsub.py:167** - # TODO: remove one day
+- [ ] **providers/google/src/airflow/providers/google/cloud/links/base.py:67** - # TODO: remove after Airflow v2 support dropped
+- [ ] **providers/google/src/airflow/providers/google/cloud/links/dataproc.py:39** - # TODO: remove DATAPROC_JOB_LOG_LINK alias in the next major release
+- [ ] **providers/google/src/airflow/providers/google/cloud/sensors/bigquery.py:85** - # TODO: Remove once deprecated
+- [ ] **providers/google/src/airflow/providers/google/cloud/sensors/tasks.py:81** - # TODO uncomment page_size once https://issuetracker.google.com/issues/155978649?pli=1 gets fixed
+- [ ] **providers/google/src/airflow/providers/google/cloud/transfers/gcs_to_gcs.py:522** - # TODO: After deprecating delimiter and wildcards in source objects,
+- [ ] **providers/google/src/airflow/providers/google/cloud/transfers/gcs_to_gcs.py:531** - # TODO: After deprecating delimiter and wildcards in source objects,
+- [ ] **providers/google/src/airflow/providers/google/cloud/transfers/gcs_to_sftp.py:164** - # TODO: After deprecating delimiter and wildcards in source objects,
+- [ ] **providers/google/src/airflow/providers/google/cloud/utils/external_token_supplier.py:160** - # TODO more information about the error can be provided in the exception by inspecting the response
+- [ ] **providers/google/src/airflow/providers/google/suite/transfers/gcs_to_gdrive.py:142** - # TODO: After deprecating delimiter and wildcards in source objects,
+- [ ] **providers/microsoft/azure/src/airflow/providers/microsoft/azure/hooks/msgraph.py:522** - # TODO: Once provider depends on Airflow 2.10 or higher code below won't be needed anymore as
+- [ ] **providers/microsoft/azure/src/airflow/providers/microsoft/azure/hooks/wasb.py:447** - # TODO: rework the interface as it might also return Awaitable
+- [ ] **providers/microsoft/azure/src/airflow/providers/microsoft/azure/hooks/wasb.py:463** - # TODO: rework the interface as it might also return Awaitable
+- [ ] **providers/microsoft/azure/src/airflow/providers/microsoft/azure/log/wasb_task_handler.py:159** - # TODO: fix this - "relative path" i.e currently REMOTE_BASE_LOG_FOLDER should start with "wasb"
+- [ ] **providers/microsoft/azure/src/airflow/providers/microsoft/azure/operators/adx.py:80** - # TODO: Remove this after minimum Airflow version is 3.0
+- [ ] **providers/microsoft/winrm/src/airflow/providers/microsoft/winrm/operators/winrm.py:183** - # TODO: Remove this after minimum Airflow version is 3.0
+- [ ] **providers/openlineage/src/airflow/providers/openlineage/utils/utils.py:2028** - # TODO: FIXME when mypy gets compatible with new attrs
+- [ ] **providers/opensearch/src/airflow/providers/opensearch/log/os_json_formatter.py:37** - # TODO: Remove this fallback when the minimum Airflow version is 3.3.0
+- [ ] **providers/papermill/src/airflow/providers/papermill/operators/papermill.py:61** - # TODO: Remove this when provider drops 2.x support.
+- [ ] **providers/samba/src/airflow/providers/samba/transfers/gcs_to_samba.py:157** - # TODO: After deprecating delimiter and wildcards in source objects,
+- [ ] **providers/sftp/src/airflow/providers/sftp/hooks/sftp.py:146** - # TODO: remove support for ssh_hook when it is removed from SFTPOperator
+- [ ] **providers/ssh/src/airflow/providers/ssh/operators/ssh.py:177** - # TODO: Remove this after minimum Airflow version is 3.0
+- [ ] **providers/standard/src/airflow/providers/standard/operators/python.py:1418** - # TODO: To be removed when Airflow 2 support is dropped
+- [ ] **providers/standard/src/airflow/providers/standard/sensors/external_task.py:495** - # TODO: Remove this block when Airflow 2 support is dropped
+- [ ] **providers/standard/src/airflow/providers/standard/sensors/time_delta.py:140** - # todo: remove backcompat when min airflow version greater than 2.11
+- [ ] **providers/standard/src/airflow/providers/standard/sensors/time_delta.py:159** - # TODO: Remove in the next major release
+- [ ] **shared/dagnode/src/airflow_shared/dagnode/node.py:303** - # TODO: Move more duplicated logic between Core and SDK task group types.
+- [ ] **shared/logging/src/airflow_shared/logging/structlog.py:618** - # TODO: Don't include this if we are using PercentFormatter -- it'll delete something we
+- [ ] **shared/module_loading/src/airflow_shared/module_loading/__init__.py:88** - # TODO: Add support for nested classes. Currently, it only works for top-level classes.
+- [ ] **shared/secrets_backend/src/airflow_shared/secrets_backend/base.py:129** - # TODO: Remove this compatibility once the minimum supported Airflow
+- [ ] **shared/secrets_backend/src/airflow_shared/secrets_backend/base.py:133** - # TODO: Only sdk has from_uri defined on it. Is it worthwhile developing the core path or not?
+- [ ] **shared/secrets_masker/src/airflow_shared/secrets_masker/secrets_masker.py:518** - # TODO: Handle Kubernetes V1EnvVar objects if needed
+- [ ] **task-sdk/src/airflow/sdk/api/client.py:977** - # TODO: Error handling
+- [ ] **task-sdk/src/airflow/sdk/bases/decorator.py:430** - # todo make this more generic (move to prepare_lineage) so it deals with non taskflow operators
+- [ ] **task-sdk/src/airflow/sdk/bases/operator.py:652** - # TODO: The following mapping is used to validate that the arguments passed to the BaseOperator are of the
+- [ ] **task-sdk/src/airflow/sdk/bases/operator.py:984** - # TODO: Task-SDK: Make these ClassVar[]?
+- [ ] **task-sdk/src/airflow/sdk/bases/operator.py:1211** - # TODO:
+- [ ] **task-sdk/src/airflow/sdk/bases/operator.py:1365** - # TODO fix this in a better way
+- [ ] **task-sdk/src/airflow/sdk/bases/timetable.py:50** - # TODO (GH-52141): Find a way to keep these and the ones in Core in sync.
+- [ ] **task-sdk/src/airflow/sdk/configuration.py:43** - # TODO: Task SDK will have its own config.yml
+- [ ] **task-sdk/src/airflow/sdk/definitions/_internal/abstractoperator.py:71** - # TODO: Task-SDK -- these defaults should be overridable from the Airflow config
+- [ ] **task-sdk/src/airflow/sdk/definitions/_internal/abstractoperator.py:233** - # TODO: Task-SDK -- Should the following methods removed?
+- [ ] **task-sdk/src/airflow/sdk/definitions/_internal/contextmanager.py:54** - # TODO: Task-SDK:
+- [ ] **task-sdk/src/airflow/sdk/definitions/_internal/expandinput.py:135** - # TODO: This initiates one API call for each XComArg. Would it be
+- [ ] **task-sdk/src/airflow/sdk/definitions/_internal/expandinput.py:196** - # TODO: This initiates one API call for each XComArg. Would it be
+- [ ] **task-sdk/src/airflow/sdk/definitions/asset/__init__.py:163** - # TODO: Collect this into a DagWarning.
+- [ ] **task-sdk/src/airflow/sdk/definitions/asset/decorators.py:222** - # TODO: Support non-asset outlets?
+- [ ] **task-sdk/src/airflow/sdk/definitions/callback.py:71** - # TODO:  This implementation doesn't support using a lambda function as a callback.
+- [ ] **task-sdk/src/airflow/sdk/definitions/context.py:74** - # TODO: Remove Operator from below once we have MappedOperator to the Task SDK
+- [ ] **task-sdk/src/airflow/sdk/definitions/dag.py:121** - # TODO: Task-SDK: we should be hashing on timetable now, not schedule!
+- [ ] **task-sdk/src/airflow/sdk/definitions/dag.py:315** - # TODO: Task-SDK: look at re-enabling slots after we remove pickling
+- [ ] **task-sdk/src/airflow/sdk/definitions/dag.py:472** - # TODO: Task-SDK: Work out how to not import jinj2 until we need it! It's expensive
+- [ ] **task-sdk/src/airflow/sdk/definitions/dag.py:572** - # TODO (GH-52141): This is never used in the sdk dag (it only makes sense
+- [ ] **task-sdk/src/airflow/sdk/definitions/dag.py:673** - # TODO: Once
+- [ ] **task-sdk/src/airflow/sdk/definitions/dag.py:728** - # TODO: This subclassing behaviour seems wrong, but it's what Airflow has done for ~ever.
+- [ ] **task-sdk/src/airflow/sdk/definitions/dag.py:788** - # todo: we can relax this to allow out-of-scope tasks to have other trigger rules
+- [ ] **task-sdk/src/airflow/sdk/definitions/dag.py:840** - # TODO: TaskSDK: move this on to BaseOperator and remove the check?
+- [ ] **task-sdk/src/airflow/sdk/definitions/dag.py:885** - # TODO: Remove in RemovedInAirflow3Warning
+- [ ] **task-sdk/src/airflow/sdk/definitions/dag.py:1268** - # TODO: Replace with calling client.dag_run.clear in Execution API at some point
+- [ ] **task-sdk/src/airflow/sdk/definitions/dag.py:1647** - # TODO: Task-SDK: remove __DAG_class
+- [ ] **task-sdk/src/airflow/sdk/definitions/deadline.py:287** - # TODO: Remove this once other deadline types exist.
+- [ ] **task-sdk/src/airflow/sdk/definitions/decorators/task_group.py:125** - # TODO: FIXME when mypy gets compatible with new attrs
+- [ ] **task-sdk/src/airflow/sdk/definitions/decorators/task_group.py:132** - # TODO: FIXME when mypy gets compatible with new attrs
+- [ ] **task-sdk/src/airflow/sdk/definitions/mappedoperator.py:273** - # TODO: Move these to task SDK's BaseOperator and remove getattr
+- [ ] **task-sdk/src/airflow/sdk/definitions/mappedoperator.py:815** - # TODO (GH-52141): Do we need this in the SDK?
+- [ ] **task-sdk/src/airflow/sdk/definitions/taskgroup.py:172** - # TODO: If attrs supported init only args we could use that here
+- [ ] **task-sdk/src/airflow/sdk/definitions/xcom_arg.py:610** - # TODO: How to tell if all the upstream TIs finished?
+- [ ] **task-sdk/src/airflow/sdk/execution_time/comms.py:705** - # TODO: Create a convert api_response to result classes so we don't need to do this
+- [ ] **task-sdk/src/airflow/sdk/execution_time/context.py:495** - # TODO: This should probably be moved to a separate module like `airflow.sdk.execution_time.comms`
+- [ ] **task-sdk/src/airflow/sdk/execution_time/context.py:548** - # TODO: This should probably be moved to a separate module like `airflow.sdk.execution_time.comms`
+- [ ] **task-sdk/src/airflow/sdk/execution_time/context.py:596** - # TODO: This should probably be moved to a separate module like `airflow.sdk.execution_time.comms`
+- [ ] **task-sdk/src/airflow/sdk/execution_time/context.py:613** - # TODO: This should probably be moved to a separate module like `airflow.sdk.execution_time.comms`
+- [ ] **task-sdk/src/airflow/sdk/execution_time/context.py:725** - # TODO: ``__getattr__`` for jinja template access like ``{{ task_store.job_id }}``
+- [ ] **task-sdk/src/airflow/sdk/execution_time/context.py:1216** - # TODO: This is temporary to avoid code duplication between here & airflow/models/taskinstance.py
+- [ ] **task-sdk/src/airflow/sdk/execution_time/coordinator.py:189** - # TODO: Importing this at the top causes circular imports.
+- [ ] **task-sdk/src/airflow/sdk/execution_time/schema/migrator.py:154** - # TODO: Cadwyn is tightly coupled to Startlette request and
+- [ ] **task-sdk/src/airflow/sdk/execution_time/supervisor.py:1478** - # TODO: Store in the SecretsCache if its enabled - see #48858
+- [ ] **task-sdk/src/airflow/sdk/execution_time/supervisor.py:2815** - # TODO: convert the dict back to a pretty stack trace
+- [ ] **task-sdk/src/airflow/sdk/execution_time/supervisor.py:3060** - # TODO: Use logging providers to handle the chunked upload for us etc.
+- [ ] **task-sdk/src/airflow/sdk/execution_time/task_runner.py:215** - # TODO: Move this entire class into a separate file:
+- [ ] **task-sdk/src/airflow/sdk/execution_time/task_runner.py:283** - # TODO: Move this to `airflow.sdk.execution_time.context`
+- [ ] **task-sdk/src/airflow/sdk/execution_time/task_runner.py:316** - # TODO: Make this go through Public API longer term.
+- [ ] **task-sdk/src/airflow/sdk/execution_time/task_runner.py:346** - # TODO: Assess if we need to pass these through timezone.coerce_datetime
+- [ ] **task-sdk/src/airflow/sdk/execution_time/task_runner.py:1056** - # TODO: Task-SDK:
+- [ ] **task-sdk/src/airflow/sdk/execution_time/task_runner.py:1445** - # TODO: Call pre execute etc.
+- [ ] **task-sdk/src/airflow/sdk/execution_time/task_runner.py:2210** - # TODO: handle timeout in case of deferral
+
+## License
+
+The source licenses are retained at the repository root.
